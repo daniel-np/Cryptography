@@ -11,9 +11,9 @@ import javax.crypto.ShortBufferException;
 public class Utility {
 	Affine affine;
 	Des des;
-	
+	static String currentEncryption;
 
-	public byte[] chooseEncryption(String currentEncryption, byte[] plainText) {
+	public byte[] chooseEncryption(byte[] plainText) {
 		switch (currentEncryption) {
 		case "No Encryption":// No encryption
 			return plainText;
@@ -24,15 +24,16 @@ public class Utility {
 			try {
 				des = new Des();
 				return des.encrypt(plainText);
-			} catch (InvalidKeyException | ShortBufferException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException e) {
+			} catch (InvalidKeyException | ShortBufferException | IllegalBlockSizeException | BadPaddingException
+					| NoSuchAlgorithmException | NoSuchPaddingException e) {
 				e.printStackTrace();
 			}
 		}
 		System.err.println("Error choosing encryption");
 		return null;
 	}
-	
-	public byte[] chooseDecryption(String currentEncryption, byte[] encryptedText) {
+
+	public byte[] chooseDecryption(byte[] encryptedText) {
 
 		switch (currentEncryption) {
 		case "No Encryption":// No encryption
@@ -44,11 +45,20 @@ public class Utility {
 			try {
 				des = new Des();
 				return des.decrypt(encryptedText);
-			} catch (InvalidKeyException | ShortBufferException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException e) {
+			} catch (InvalidKeyException | ShortBufferException | IllegalBlockSizeException | BadPaddingException
+					| NoSuchAlgorithmException | NoSuchPaddingException e) {
 				e.printStackTrace();
 			}
 		}
 		System.err.println("Error choosing encryption");
 		return null;
+	}
+
+	public String getCurrentEncryption() {
+		return Utility.currentEncryption;
+	}
+
+	public static void setCurrentEncryption(String currentEncryption) {
+		Utility.currentEncryption = currentEncryption;
 	}
 }

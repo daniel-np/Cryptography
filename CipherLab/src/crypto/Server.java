@@ -12,7 +12,6 @@ import java.net.Socket;
 import utility.Utility;
 
 public class Server implements IParent, Runnable {
-	String currentEncryption = "No Encryption";
 	private Thread t;
 
 	public void start() {
@@ -54,7 +53,7 @@ public class Server implements IParent, Runnable {
 			byte[] clientMsg = (byte[]) ois.readObject();
 
 			// Print the encrypted message
-			System.out.println(currentEncryption + "Server: Encrypted message from client: " + new String(clientMsg));
+			System.out.println("Server: Encrypted message from client: " + new String(clientMsg));
 			
 			// Print the message in UTF-8 format
 			String decryptedMessage = new String(decryptMessage(clientMsg), "UTF-8");
@@ -85,41 +84,18 @@ public class Server implements IParent, Runnable {
 		}
 
 	}
-
-//	Affine utility = new Affine();
-//
-//	@Override
-//	public byte[] encryptMessage(byte[] plainText) {
-//		byte[] cipherText = utility.encrypt(plainText);
-//		return cipherText;
-//	}
-//
-//	@Override
-//	public byte[] decryptMessage(byte[] cipherText) {
-//		byte[] plainText = utility.decrypt(cipherText);
-//		return plainText;
-//	}
 	Utility utility;
 	@Override
 	public byte[] encryptMessage(byte[] plainText) {
 		utility = new Utility();
-		byte[] cipherText = utility.chooseEncryption(currentEncryption,plainText);
+		byte[] cipherText = utility.chooseEncryption(plainText);
 		return cipherText;
 	}
 
 	@Override
 	public byte[] decryptMessage(byte[] cipherText) {
 		utility = new Utility();
-		byte[] plainText = utility.chooseDecryption(currentEncryption,cipherText);
+		byte[] plainText = utility.chooseDecryption(cipherText);
 		return plainText;
 	}
-	
-	public String getCurrentEncryptionOption() {
-		return currentEncryption;
-	}
-
-	public void setCurrentEncryption(String currentEncryption) {
-		this.currentEncryption = currentEncryption;
-	}
-
 }

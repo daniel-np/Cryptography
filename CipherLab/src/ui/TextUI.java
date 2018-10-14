@@ -50,8 +50,6 @@ public class TextUI {
 				currentEncryption = option.optionString();
 				//Set client encryption
 				client.setCurrentEncryption(currentEncryption);
-				//Set server encryption
-				server.setCurrentEncryption(currentEncryption);
 				System.out.println(currentEncryption + " set!");
 				isValidInput = true;
 				System.out.println();

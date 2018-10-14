@@ -63,13 +63,15 @@ public class Client implements IParent {
 
 	@Override
 	public byte[] encryptMessage(byte[] plainText) {
-		byte[] cipherText = utility.chooseEncryption(currentEncryption, plainText);
+		Utility.setCurrentEncryption(currentEncryption);
+		byte[] cipherText = utility.chooseEncryption(plainText);
 		return cipherText;
 	}
 
 	@Override
 	public byte[] decryptMessage(byte[] cipherText) {
-		byte[] plainText = utility.chooseDecryption(currentEncryption, cipherText);
+		Utility.setCurrentEncryption(currentEncryption);
+		byte[] plainText = utility.chooseDecryption(cipherText);
 		return plainText;
 	}
 

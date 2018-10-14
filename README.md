@@ -1,7 +1,7 @@
 # Cryptography
 Testing various ciphers
 
-- If implementing more ciphers, add them to ui>EncryptionOptions & utility>Utility
-
-TODO!
-- Custom message from client
+- If implementing more ciphers:
+  - create encryption class in utility
+  - Implement in Utility class
+  - add them to ui>EncryptionOptions to add to menu
